@@ -62,6 +62,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-关于接口和抽象类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/11/关于接口和抽象类/" class="article-date">
+  <time datetime="2019-07-11T13:54:06.000Z" itemprop="datePublished">2019-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/11/关于接口和抽象类/">关于接口和抽象类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>我这里说的接口是java里面一系列方法的声明，是一些方法特征的集合。</p>
+<p>那么接口通俗来讲怎么理解呢？在我查阅一些资料，书籍加上我自己的理解得出的结论是：接口其实就是封装着其他类所要实现的方法，并使其规范化。那么哪里体现出规范化呢？答案是接口的抽象特性促使每一个实现它的类都要实现接口中的方法，这就能做到规范性。</p>
+<p>其实这样理解对于有些朋友来说不够深刻，那我们可以举例子来说明：比如我定义这样一个接口，里面放的是有关打印机的一些方法，比如打印、比如排版等等。。。这些都是打印机所共有的，每一个实体打印机实现这个接口就必须对这些方法进行实现，从而能很好地实现规范性。那解决规范性后，这里又会有朋友觉得，这里貌似用抽象类以及它的实现类来做效果其实一样并且所有打印机都是同一类实现集成同一个父类这样的表现形式似乎更加合理。这里确实就是接口和抽象类的区别之处，接口一般封装的是方法，并且这些方法并不一定都属于同一类或其子类的独有方法，它可以封装其他类的方法。比如：有这样一个接口里面有run这个方法，那我这个接口不一定只能被某一类动物实现，也可以给其他不同类但有同一个动作行为的动物，比如狗和猫，或者人，都可以实现这个接口。妥善理解这一点将是能否掌握好接口和抽象类的关键。</p>
+<h2 id="表现形式"><a href="#表现形式" class="headerlink" title="表现形式"></a>表现形式</h2><p>在表现形式上接口和抽象类又有相同和不同之处</p>
+<p>下面列出几点：</p>
+<p>相同点和不同点：<br>相同点：<br>1、都具有抽象方法，抽象方法都不可以是private  static<br>2、抽象方法都需要被子类/实现类重写<br>3、都不能实例化<br>4、都具有多态性</p>
+<p>不同点：<br>1、关键字不同<br>    抽象类：abstract<br>    接口：interface<br>2、方法<br>    抽象类：支持普通成员方法和抽象方法<br>    接口：只有抽象方法<br>3、变量/常量：<br>    抽象类：支持所有修饰符的变量<br>    接口：只能是public  static  final 修饰的常量<br>4、static<br>    抽象类：支持static静态代码块<br>    接口：不支持<br>5、继承和实现：<br>    抽象类：单继承<br>    接口：多继承多实现</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/11/关于接口和抽象类/" data-id="cjxyr67rc0000scueuv28bjk8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-我的第二篇博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/05/我的第二篇博客/" class="article-date">
@@ -84,13 +129,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="关于多线程的锁机制"><a href="#关于多线程的锁机制" class="headerlink" title="关于多线程的锁机制"></a>关于多线程的锁机制</h2><p>内容</p>
+        <h2 id="晚自习的第一天"><a href="#晚自习的第一天" class="headerlink" title="晚自习的第一天"></a>晚自习的第一天</h2><p>​        在同学的帮助下，我终于把自己写的一个打算部署到自己的第一个网页设计的小游戏“连连看”给大致写完了。并且还顺便用两分钟把老师布置的加减乘除的简单作业用接口多态的方式给解决了。</p>
+<p>​        在我看来，连连看这个小游戏其实是极具一款可以在很大程度上锻炼你设计头脑的游戏。它无论是在棋盘的布置，还是在棋子的生成，以及方法的调用都是极具设计思维的。</p>
+<p>​        首先，在棋盘的布置上，由于我们专注于用简单的代码实现，所以我们是这样设计的：在棋盘类里面构建棋子类，棋子类是用ArrayList来封装，具体代码如ArrayList<lianbot> al = new ArrayList();并且构建棋盘的长和宽的常量 Height和weight，因为棋盘一般是正方形的，所以长和宽应相等。在棋盘的类里面应该还有初始化棋盘的方法InitBoard，这个方法里面即是用一个for循环让i从0到Height*weight，al.add(i)。并且因为你要构建的是棋盘，所以最好也加上 构建每个棋子的X坐标和Y坐标的方法在初始化棋盘里面，这样，棋盘的布置大体就完成。可见，我们并没有用很高深的方法，所使用的都是最基础的java知识，再加上一些设计的思路。在初始化棋盘大体完成以后，还要做个打印方法把棋盘打印出来，现在先不急，等确定每个棋子的颜色（用数字代替）再打印。</lianbot></p>
+<p>​        刚刚说到要确定棋子的颜色，那棋子的颜色怎么设计呢（用数字代替颜色）？</p>
+<p>​        我们知道，</p>
 <hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/我的第二篇博客/" data-id="cjxsh1q4j0002n4ue4i31dunt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/我的第二篇博客/" data-id="cjxyr4l390004l0ueabbcbztw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/我的第一篇博客文章/" data-id="cjxsh1q4g0001n4uepiwywh1d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/我的第一篇博客文章/" data-id="cjxyr4l2i0001l0ue4ewsh54e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/">---</a></li></ul>
@@ -180,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/hello-world/" data-id="cjxsh1q490000n4ueosy5i7hi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/hello-world/" data-id="cjxyr4l2b0000l0ue8z4unyq4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +252,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">---</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">---</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
     </div>
   </div>
 
@@ -213,7 +262,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/" style="font-size: 10px;">---</a>
+      <a href="/tags/" style="font-size: 10px;">---</a> <a href="/tags/java/" style="font-size: 10px;">java</a>
     </div>
   </div>
 
@@ -233,6 +282,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/07/11/关于接口和抽象类/">关于接口和抽象类</a>
+          </li>
         
           <li>
             <a href="/2019/07/05/我的第二篇博客/">我的第二篇博客</a>
