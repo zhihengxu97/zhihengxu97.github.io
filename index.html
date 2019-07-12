@@ -62,6 +62,74 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-关于理解容器中嵌套其他容器的遍历的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/" class="article-date">
+  <time datetime="2019-07-12T14:51:35.000Z" itemprop="datePublished">2019-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/">关于理解容器中嵌套其他容器的遍历的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于容器的分类"><a href="#关于容器的分类" class="headerlink" title="关于容器的分类"></a>关于容器的分类</h2><p>容器的顶级父类的是一个叫Collection的接口，在这个接口下一般又有着Set和List这两个子类接口。</p>
+<p>这两个子类的区别是Set：数据存贮无序，值不可以重复。。。而List：有序存贮，有重复值，允许null</p>
+<p>这两个都是jdk提供的用于实现存储的容器，以便于我们在不同的情况下可以更好的运用。</p>
+<hr>
+<h2 id="关于容器的遍历"><a href="#关于容器的遍历" class="headerlink" title="关于容器的遍历"></a>关于容器的遍历</h2><p>一般如果容器的泛型用的是基本数据类型或者String类，这种就可以直接调用各个接口自带的方法来实现遍历。那如果是容器里面嵌套着其他的容器那么需要两层循环来遍历</p>
+<p>代码思路为：先用迭代器（不用也行），遍历容器，这时从迭代器中拿出来的是迭代器的泛型定义的类型，而要实现二层迭代，则要先强转一下，转成容器类型，转了之后又通过转成的容器调用的迭代器进行第二次迭代，这时拿出来还是迭代器泛型中定义的类型，但我们在容器中的容器中装的是类或者字符串或者其他等等，这时又要强转，转成Object ，最后输出的时候根据容器中的容器装的数据的类型进行判断强转成相对应的类型再输出就行了！ </p>
+<p>具体代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Object&gt; setobj = new HashSet&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setobj.add(bulidSetDog()); 这里的两个方法返回是Set&lt;Dog&gt;和Set&lt;String&gt;类型</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setobj.add(bulidSetStr()); 这里的两个方法返回是Set&lt;Dog&gt;和Set&lt;String&gt;类型</span><br></pre></td></tr></table></figure>
+
+<p>​    Iterator<object> it = setobj.iterator();</object></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">while (it.hasNext())&#123;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Object&gt; obj = (Set&lt;Object&gt;)it.next();</span><br></pre></td></tr></table></figure>
+
+<p>​                    Iterator<object> it1 = obj.iterator();</object></p>
+<p>​                    while (it1.hasNext()){</p>
+<p>​                                Object ob = it1.next();</p>
+<p>​                                if(ob instanceof String){</p>
+<p>​                                            System.out.println(ob.toString());</p>
+<p>​                                }else {</p>
+<p>​                                            System.out.println(((Dog)ob).getNickname()+”\t”+((Dog)ob).getType());</p>
+<p>​                                }</p>
+<p>​                        }</p>
+<p>​                }</p>
+<p>​        }</p>
+<p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/" data-id="cjy08vthr0004yguem09bqc41" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-关于接口和抽象类" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/11/关于接口和抽象类/" class="article-date">
@@ -95,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/11/关于接口和抽象类/" data-id="cjxyrd1zk000228uematmbuzb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/11/关于接口和抽象类/" data-id="cjy08vtgz0000ygue3r7e1tco" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -139,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/我的第二篇博客/" data-id="cjxyrd1zo000428ue3i58ln3v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/我的第二篇博客/" data-id="cjy08vthv0007yguesu0mnq1v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/我的第一篇博客文章/" data-id="cjxyrd1zh000128uemao1vak4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/我的第一篇博客文章/" data-id="cjy08vtht0005ygue0pb0u0n2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/">---</a></li></ul>
@@ -229,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/hello-world/" data-id="cjxyrd1z5000028ue1hdcl82l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/hello-world/" data-id="cjy08vth50001ygue82fjqz00" class="article-share-link">Share</a>
       
       
     </footer>
@@ -252,7 +320,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">---</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">---</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li></ul>
     </div>
   </div>
 
@@ -262,7 +330,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/" style="font-size: 10px;">---</a> <a href="/tags/java/" style="font-size: 10px;">java</a>
+      <a href="/tags/" style="font-size: 10px;">---</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a>
     </div>
   </div>
 
@@ -282,6 +350,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/">关于理解容器中嵌套其他容器的遍历的方法</a>
+          </li>
         
           <li>
             <a href="/2019/07/11/关于接口和抽象类/">关于接口和抽象类</a>
