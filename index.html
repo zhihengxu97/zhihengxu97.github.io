@@ -62,6 +62,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-关于JDBC运用的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/17/关于JDBC运用的总结/" class="article-date">
+  <time datetime="2019-07-17T06:19:22.000Z" itemprop="datePublished">2019-07-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/17/关于JDBC运用的总结/">关于JDBC运用的总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="jdbc的基本用法"><a href="#jdbc的基本用法" class="headerlink" title="jdbc的基本用法"></a>jdbc的基本用法</h2><p>首先要下载oracle数据库，个人则应该下的是标准版。然后要导入第三方jar包，ojdbc-6.jar。笔者用到是IDEA开发工具，还要在IDEA里面手动导入oracle数据库的源才能使用。</p>
+<hr>
+<p>在开始时，要先给数据库配上驱动，用java语句<strong>Class.forName(“oracle.jdbc.driver.OracleDriver”);</strong></p>
+<p>接着要调用Connection类创建 <strong>DriverManager.getConnection(url,user,password)。</strong></p>
+<p>接着最核心的业务来了，也就是要和所连接的oracle数据库相关联的操作，即为构建你所要进行查询的sql语句来找到你需要的信息并进行使用。定义一个String类来装你所要执行的sql语句，如果业务要求比较高，对你所输入的查询条件要求为动态查询则1、可以用？覆盖查询的条件部分，在下面调用<strong>PrepareStatement</strong>的<strong>set</strong>方法来进行赋值2、可以使用<strong>StringBuilder</strong> 或者 <strong>StringBuffer</strong> 来构建sql语句，然后在需要动态的修改的部分用append方法接上字符串。所接的字符串可以用scanner 来进行输入。</p>
+<p>sql语句设计完成后则调用PrepareStatement 创建一个实例 ，实例的赋值为 connection的prepareStatement方法，方法的形参放的就是sql语句</p>
+<p>再接着如果要查询sql所查处的所有信息，可以实例化<strong>ResultSet</strong> 赋值语句为PrepareStatement的<strong>executeQuery</strong>方法</p>
+<p>接着通过<strong>while(rs.next()){}</strong> 循环，则能依次遍历sql语句查询出来的字段 </p>
+<p>最后要记得释放资源</p>
+<h2 id="封装和优化"><a href="#封装和优化" class="headerlink" title="封装和优化"></a>封装和优化</h2><p>在我们把jdbc代码核心部分写完之后，我们可以开始考虑如何要代码封装起来，并且得到优化。</p>
+<p>首先，我们可以把会用到的变量常量先封装起来，如定义一个DButil类，里面封装我们要重复利用的常量  如 url,user,password   以及 Connection  PrepareStatement  ResultSet等，接着我们可以在DButil里面定义一个静态代码块，里面用来显式地加载数据库驱动，优先级高于构造方法。如果我们还想动态改变url，user，password的值，则可以定义一个文件，里面放driver=oracle.jdbc.driver.OracleDriver</p>
+<p>url=jdbc:oracle:thin:@localhost:1521:orcl</p>
+<p>loginUser=scott</p>
+<p>loginPass=scott</p>
+<p>然后定义一个propertyBean类，里面放相对应的键值对的键值，driver，url,loginuser,loginpass。然后定义一个方法，返回值是propertyBean，在里边，通过调用properties的getperty方法，通过键值来返回值，放到propertyBean里面，然后就在具体实现类就直接调用propertyBean里面的方法，要改就在DB.properties的文件里面修改相关值即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/17/关于JDBC运用的总结/" data-id="cjy8s4qu80000wouejvgs4j0r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdbc/">jdbc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-关于理解容器中嵌套其他容器的遍历的方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/" class="article-date">
@@ -118,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/" data-id="cjy8rriu10002z4uevmonx5e3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/" data-id="cjy8s3pny0005cgueby12dyr7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
@@ -163,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/11/关于接口和抽象类/" data-id="cjy8rrity0001z4uerqx07355" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/11/关于接口和抽象类/" data-id="cjy8s3pnc0001cgue8pq58ziw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -207,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/我的第二篇博客/" data-id="cjy8rriu80005z4ue4dqv9voe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/我的第二篇博客/" data-id="cjy8s3po00007cgueqqs4rfj1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/我的第一篇博客文章/" data-id="cjy8rriu70004z4uegw5bgccb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/我的第一篇博客文章/" data-id="cjy8s3pnw0004cgueyyojpz94" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/">---</a></li></ul>
@@ -297,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/hello-world/" data-id="cjy8rrit00000z4uefh7bwma6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/hello-world/" data-id="cjy8s3pn50000cgue0yo0tg2i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +373,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">---</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/">---</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdbc/">jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li></ul>
     </div>
   </div>
 
@@ -330,7 +383,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/" style="font-size: 10px;">---</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a>
+      <a href="/tags/" style="font-size: 10px;">---</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jdbc/" style="font-size: 10px;">jdbc</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a>
     </div>
   </div>
 
@@ -352,6 +405,10 @@
       <ul>
         
           <li>
+            <a href="/2019/07/17/关于JDBC运用的总结/">关于JDBC运用的总结</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/12/关于理解容器中嵌套其他容器的遍历的方法/">关于理解容器中嵌套其他容器的遍历的方法</a>
           </li>
         
@@ -365,10 +422,6 @@
         
           <li>
             <a href="/2019/07/05/我的第一篇博客文章/">我的第一篇博客文章</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/05/hello-world/">Hello World</a>
           </li>
         
       </ul>
